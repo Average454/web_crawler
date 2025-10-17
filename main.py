@@ -16,7 +16,7 @@ def clean_chapter(text: str) -> str:
     return "\n".join(lines)
 
 file = docx.Document()
-book_index_url = "https://czbooks.net/n/s6lnhk"
+book_index_url = "https://czbooks.net/n/s6lnhk" ##自行輸入小說的網址
 
 with sync_playwright() as p:
     browser = p.chromium.launch(headless=False)  # 改成 False 可看瀏覽器畫面
@@ -34,7 +34,7 @@ with sync_playwright() as p:
         chapters = chapter_list.find_all("a")
         print(f"共找到 {len(chapters)} 個章節")
 
-    for idx, ch in enumerate(chapters[50:100], 1):  # 自行調整要從哪張開始抓
+    for idx, ch in enumerate(chapters[50:100], 1):  # 自行調整要從哪章開始抓
         title = ch.get_text(strip=True)
         link = ch.get("href")
 
@@ -64,3 +64,4 @@ with sync_playwright() as p:
         print("📘 全部章節儲存完成")
 
     browser.close()
+
